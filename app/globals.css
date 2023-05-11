@@ -13,17 +13,17 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    --background-sel-rgb: 240, 240, 240;
   }
 }
 
 body {
   width: 100vw;
   height: 100vh;
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  overflow: hidden;
 }
+
+.selected {
+  @apply bg-gradient-to-t from-gray-800
+}
+

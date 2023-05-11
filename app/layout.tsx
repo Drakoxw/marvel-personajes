@@ -1,7 +1,8 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, Cinzel } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+const cinzel = Cinzel({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   console.log('hola mundo')
   return (
     <html lang="es">
-      <body className={inter.className}>{children}</body>
+      <body className={cinzel.className}>{children}</body>
     </html>
   )
 }

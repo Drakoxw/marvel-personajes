@@ -4,9 +4,9 @@ import RootLayout from "../layout";
 export default function Personajes() {
 
   return (
-    <RootLayout>
+    <RootLayout >
       <Navbar />
-      <main>
+      <main className="w-full h-full bg-gray-900 bg-[url('/img/wallpaper.jpg')] bg-cover bg-center">
         Hola desde Personajes
       </main>
     </RootLayout>
