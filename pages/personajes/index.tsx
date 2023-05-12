@@ -1,14 +1,14 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import YouTube, { YouTubeProps } from "react-youtube";
 
 import Navbar from "@/components/nav-bar";
-import RootLayout from "../layout";
+import CardPersonaje from "@/components/card-personaje";
+import LayoutHydrated from "@/components/hydrated";
 import CardVertical from "@/components/card-vertical";
+// import RootLayout from "../layout";
+
 import { filterTable, generateNumberRandom, generateRange } from "@/utils";
 import { CardData } from "@/domain/interfaces";
-import CardPersonaje from "@/components/card-personaje";
 import { getHeroes } from "@/external/http";
 
 export default function Personajes() {
@@ -24,8 +24,7 @@ export default function Personajes() {
   
   const nextMovie = "The Marvels";
   const videoID = "OMWRSrFlqoM";
-  const classGrad =
-    "h-5 bg-gradient-to-t from-teal-500 from-10% via-teal-200 via-70% to-teal-500 to-100%";
+  const classGrad = "h-5 bg-gradient-to-t from-teal-500 from-10% via-teal-200 via-70% to-teal-500 to-100%";
   const totalMeta = 100;
   const totalProducidas = generateNumberRandom(totalMeta / 2, totalMeta);
   const porcents: number[] = generateRange(totalMeta);
@@ -55,7 +54,7 @@ export default function Personajes() {
   };
 
   return (
-    <RootLayout>
+    <>
       <Navbar />
       <main className="w-full h-full bg-gray-900 text-gray-300 bg-[url('/img/wallpaper.jpg')] bg-cover bg-fixed bg-center py-8 px-12">
         <section className="flex justify-between items-center">
@@ -155,6 +154,6 @@ export default function Personajes() {
           </div>
         </section>
       </main>
-    </RootLayout>
+    </>
   );
 }

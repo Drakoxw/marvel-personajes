@@ -1,6 +1,4 @@
-"use client"
-
-import { ROUTES } from "@/domain/constants";
+import { ROUTES } from "@/domain/constants"
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
@@ -84,7 +82,7 @@ export default function Navbar() {
             return (
               <Link className={`px-4 h-full w-[130px] flex flex-col items-center justify-center ${route === el.route ? 'selected' : '' }`} href={el.route} key={i}>
                 <div className="relative w-full">{ route === el.route ? selected() : <></>}</div>
-                {el.title}
+                <p className={route === el.route ? 'text-amber-500': ''}>{el.title}</p>
               </Link>
             );
           })}
