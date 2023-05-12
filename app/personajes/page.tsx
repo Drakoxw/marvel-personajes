@@ -97,11 +97,11 @@ export default function Personajes() {
               </div>
             </CardVertical>
 
-            {/* <CardVertical addClass="hidden lg:!flex lg:!w-4/12">
+            <CardVertical addClass="hidden lg:!flex lg:!w-4/12">
               <div className="w-12/12">
                 <YouTube videoId={videoID} opts={opts} onReady={onPlayerReady} />
               </div>
-            </CardVertical> */}
+            </CardVertical>
 
             <CardVertical addClass="hidden md:!flex md:!w-5/12 lg:!w-4/12">
               <div className="w-full h-full bg-cover flex justify-end items-end bg-center bg-[url('https://www.nacionflix.com/__export/1676478225478/sites/debate/img/2023/02/15/the-marvels_1.jpg_172596871.jpg')]">
