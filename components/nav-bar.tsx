@@ -7,7 +7,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 function selected() {
   return (
     <div className="-top-[44px] absolute">
-      <div className="rotate-45 w-6 h-6 border-amber-500 border ml-[36px]">
+      <div className="rotate-45 w-6 h-6 border-amber-500 border ml-[23px] md:ml-[36px]">
         <div className="border-amber-500 border w-5 h-5">
           <div className="border-amber-500 border w-4 h-4">
           </div>
@@ -27,7 +27,7 @@ function MobileNav({
 }) {
   return (
     <div
-      className={`absolute top-0 left-0 h-screen w-screen bg-white transform ${
+      className={`absolute top-0 left-0 h-screen w-screen bg-white transform text-gray-700 ${
         open ? "-translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out filter drop-shadow-md `}
     >
@@ -37,11 +37,11 @@ function MobileNav({
           {Title}
         </Link>
       </div>
-      <div className="flex flex-col ml-4">
+      <div className="flex flex-col mx-4">
         {ROUTES.map((el, i) => {
           return (
             <a
-              className="text-xl font-medium my-4"
+              className="text-xl font-medium my-3"
               href={el.route}
               key={i}
               onClick={() =>
@@ -65,7 +65,7 @@ export default function Navbar() {
 
   return (
     <nav className="flex filter drop-shadow-md bg-gray-950 text-gray-200 font-bold px-12 h-20 items-center">
-      <MobileNav open={open} setOpen={setOpen} />
+      {/* <MobileNav open={open} setOpen={setOpen} /> */}
       <div className="w-auto flex items-center">
         <Link className="text-2xl font-semibold flex" href="/">
           <Image
@@ -77,10 +77,10 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="w-full flex justify-start items-center h-full">
-        <div className="hidden h-full ml-4 md:flex justify-center items-center">
+        <div className="h-full ml-4 flex justify-center items-center">
           {ROUTES.map((el, i) => {
             return (
-              <Link className={`px-4 h-full w-[130px] flex flex-col items-center justify-center ${route === el.route ? 'selected' : '' }`} href={el.route} key={i}>
+              <Link className={`px-4 h-full w-[100px] md:w-[130px] flex flex-col items-center justify-center ${route === el.route ? 'selected' : '' }`} href={el.route} key={i}>
                 <div className="relative w-full">{ route === el.route ? selected() : <></>}</div>
                 <p className={route === el.route ? 'text-amber-500': ''}>{el.title}</p>
               </Link>
@@ -88,7 +88,7 @@ export default function Navbar() {
           })}
         </div>
       </div>
-      <div className="w-auto flex items-center gap-4">
+      <div className="w-auto hidden md:flex items-center gap-4">
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ export default function Navbar() {
         </span>
       </div>
 
-      <div className="ml-8">
+      {/* <div className="ml-8">
         <div
           className="z-50 flex relative w-8 h-8 flex-col justify-between items-center md:hidden"
           onClick={() => {
@@ -138,7 +138,7 @@ export default function Navbar() {
             }`}
           />
         </div>
-      </div>
+      </div> */}
     </nav>
   );
 }
