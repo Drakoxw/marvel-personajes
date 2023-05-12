@@ -33,7 +33,10 @@ function httpErrorHandler(error: AxiosError) {
 
 function createAxios() {
     const instance = axios.create({
-      withCredentials: false
+      withCredentials: false,
+      headers: {
+        mode: 'no-cors'
+      }
     })
 
     instance.interceptors.response.use((response) => response, httpErrorHandler)
