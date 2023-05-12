@@ -1,37 +1,25 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import YouTube, { YouTubeProps } from "react-youtube";
+
 import Navbar from "@/components/nav-bar";
 import RootLayout from "../layout";
 import CardVertical from "@/components/card-vertical";
 import { filterTable, generateNumberRandom, generateRange } from "@/utils";
-import YouTube, { YouTubeProps } from "react-youtube";
-import { CardData, MarvelResponse } from "@/domain/interfaces";
-import { useEffect, useState } from "react";
+import { CardData } from "@/domain/interfaces";
 import CardPersonaje from "@/components/card-personaje";
-import next from "next/types";
+import { getHeroes } from "@/external/http";
 
 export default function Personajes() {
   const [data, setData] = useState<CardData[]>([]);
   const [page, setPage] = useState<number>(1);
-  useEffect(() => {
-    const key = "a1bfbf51599dfee6d9b2195e642e1651";
-    const hash = "8291aa386f14f30dd8f080dd890fcee4";
-    const ts = 1;
 
-    fetch(`http://gateway.marvel.com/v1/public/characters?apikey=${key}&ts=${ts}&hash=${hash}`)
-      .then((res) => res.json())
-      .then((json: MarvelResponse) => {
-        const data = json.data.results.map((hero) => {
-          return {
-            img: `${hero.thumbnail.path}.${hero.thumbnail.extension}`,
-            name: hero.name,
-            comics: hero.comics.available,
-            series: hero.series.available,
-          };
-        });
-        setData(data);
-      })
-      .catch((err) => console.warn(err));
+  useEffect(() => {
+    (async() => {
+      const res = await getHeroes()
+      setData(res);
+    })()
   }, []);
   
   const nextMovie = "The Marvels";
@@ -51,7 +39,9 @@ export default function Personajes() {
   };
 
   const nextPage = () => {
-    setPage(page + 1);
+    if (data.length > 0 && page < data.length / 5) {
+      setPage(page + 1);
+    }
   };
 
   const prevPage = () => {
@@ -63,6 +53,7 @@ export default function Personajes() {
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     event.target.pauseVideo();
   };
+
   return (
     <RootLayout>
       <Navbar />
@@ -140,7 +131,7 @@ export default function Personajes() {
               width="28"
               height="28"
               fill="currentColor"
-              className="bi bi-arrow-left-circle-fill"
+              className="bi bi-arrow-left-circle-fill cursor-pointer"
               viewBox="0 0 16 16"
             >
               <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
@@ -156,7 +147,7 @@ export default function Personajes() {
               width="28"
               height="28"
               fill="currentColor"
-              className="bi bi-arrow-right-circle-fill"
+              className="bi bi-arrow-right-circle-fill cursor-pointer"
               viewBox="0 0 16 16"
             >
               <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
