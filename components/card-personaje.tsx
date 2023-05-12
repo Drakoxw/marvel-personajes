@@ -2,7 +2,6 @@ import { CardData } from "@/domain/interfaces";
 import Image from "next/image";
 
 export default function CardPersonaje({ data }:{ data : CardData}) {
-  console.log('data :', data.img)
   const urlOrBg = data.img.includes('image_not_available') ? 'bg-red-800' : ''
   return (
     <div className="flex">
