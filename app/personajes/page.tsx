@@ -1,10 +1,36 @@
+"use client"
+
 import Navbar from "@/components/nav-bar";
 import RootLayout from "../layout";
 import CardVertical from "@/components/card-vertical";
 import { generateNumberRandom, generateRange } from "@/utils";
 import YouTube, { YouTubeProps } from "react-youtube";
+import { CardData, MarvelResponse } from "@/domain/interfaces";
+import { useEffect, useState } from "react";
+import CardPersonaje from "@/components/card-personaje";
 
 export default function Personajes() {
+  const [data, setData] = useState<CardData[]>([]);
+  useEffect(() => {
+    const key = 'a1bfbf51599dfee6d9b2195e642e1651'
+    const hash = '8291aa386f14f30dd8f080dd890fcee4'
+    const ts = 1
+
+    fetch(`http://gateway.marvel.com/v1/public/characters?apikey=${key}&ts=${ts}&hash=${hash}`)
+    .then(res => res.json())
+    .then((json: MarvelResponse) => {
+      const data = json.data.results.map((hero) => {
+        return {
+          img: `${hero.thumbnail.path}.${hero.thumbnail.extension}`,
+          name: hero.name,
+          comics: hero.comics.available,
+          series: hero.series.available
+        }
+      })
+      setData(data)
+    })
+    .catch(err => console.warn(err))
+  }, [])
   const nextMovie = 'The Marvels'
   const videoID = 'OMWRSrFlqoM'
   const classGrad = 'h-5 bg-gradient-to-t from-teal-500 from-10% via-teal-200 via-70% to-teal-500 to-100%'
@@ -65,6 +91,14 @@ export default function Personajes() {
           </div>
 
         </section>
+
+        <section className="mt-4">
+          <div className="cards-personajes flex flex-wrap gap-4 justify-center">
+            {data.length > 0 ? data.map((el, i) => {
+              return (<CardPersonaje data={el} key={i} />)
+            })  : <></>}
+          </div>
+        </section> 
         
       </main>
     </RootLayout>
