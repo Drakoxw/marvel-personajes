@@ -3,6 +3,7 @@ import Image from "next/image";
 
 export default function CardPersonaje({ data }:{ data : CardData}) {
   console.log('data :', data.img)
+  const urlOrBg = data.img.includes('image_not_available') ? 'bg-red-800' : `bg-[url('/img/wallpaper.jpg')]`
   return (
     <div className="flex">
       <section className="border-gray-500 border rounded">
@@ -15,11 +16,11 @@ export default function CardPersonaje({ data }:{ data : CardData}) {
         </div>
 
         <div className={`absolut rounded-full h-[114px] w-[114px] mt-[15px] -ml-[158px] `}>
-          wwwww
+          {urlOrBg}
         </div>
 
         <div className="absolut bg-[#1d2329] h-8 w-12 mt-[46px] -ml-24">
-          {data.comics} {data.img}
+          {data.comics}
         </div>
         
         <div className="absolut bg-[#1d2329] h-8 w-12 mt-[26px] -ml-24">
